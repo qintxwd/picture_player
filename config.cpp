@@ -87,7 +87,7 @@ bool Config::loadConfig()
             int height_temp = dnConfig.toElement().attribute("height").toInt(&ok);
             if(ok)height = height_temp;
         }else if(dnConfig.toElement().tagName()=="picture"){
-            int interval_temp = dnConfig.toElement().attribute("width").toInt(&ok);
+            int interval_temp = dnConfig.toElement().attribute("interval").toInt(&ok);
             if(ok)interval = interval_temp;
         }
     }

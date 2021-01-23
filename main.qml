@@ -5,11 +5,10 @@ import QtQuick.Window 2.12
 Window {
     width: g_config.getWidth()
     height: g_config.getHeight()
-    property bool portaitMode: Screen.desktopAvailableHeight > Screen.desktopAvailableWidth
-//    x:portaitMode?Screen.width:Screen.height
+    x:Screen.width //show on the second screen
     visible: true
     title: qsTr("qyh_picture_player")
-//    flags: Qt.FramelessWindowHint|Qt.Window
+    flags: Qt.FramelessWindowHint|Qt.Window
 
     Image {
         id: image
@@ -24,10 +23,10 @@ Window {
         repeat: true
         running: true
         onTriggered: {
-            var xx = image.image_paths;
-            image.image_index+=1;
-            if(image.image_index>=image.image_paths.length){
+            if(image.image_index+1>=image.image_paths.length){
                 image.image_index = 0;
+            }else{
+                image.image_index+=1;
             }
         }
     }
