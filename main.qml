@@ -3,9 +3,11 @@ import QtQml 2.0
 import QtQuick.Window 2.12
 
 Window {
+    id:mainWindow
     width: g_config.getWidth()
     height: g_config.getHeight()
-    x:Screen.width //show on the second screen
+    property int to_set_x: Screen.width
+//    x:Screen.width //show on the second screen
     visible: true
     title: qsTr("qyh_picture_player")
     flags: Qt.FramelessWindowHint|Qt.Window
@@ -29,5 +31,14 @@ Window {
                 image.image_index+=1;
             }
         }
+    }
+
+    Component.onCompleted: {
+        console.log("to_set_x="+to_set_x);
+        console.log("---");
+        mainWindow.x = mainWindow.to_set_x;
+        console.log("to_set_x="+to_set_x);
+        console.log("to_set_x="+to_set_x);
+        console.log("---");
     }
 }
