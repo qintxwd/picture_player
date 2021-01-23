@@ -1,9 +1,34 @@
 import QtQuick 2.12
+import QtQml 2.0
 import QtQuick.Window 2.12
 
 Window {
-    width: 640
-    height: 480
+    width: g_config.getWidth()
+    height: g_config.getHeight()
+    property bool portaitMode: Screen.desktopAvailableHeight > Screen.desktopAvailableWidth
+//    x:portaitMode?Screen.width:Screen.height
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("qyh_picture_player")
+//    flags: Qt.FramelessWindowHint|Qt.Window
+
+    Image {
+        id: image
+        property int image_index: 0
+        property var image_paths: g_config.getPictureNames();
+        anchors.fill: parent
+        source: image_paths.length>0?("file:///"+g_strExeRoot+"/pictures/"+image_paths[image_index]):"";
+    }
+
+    Timer{
+        interval: g_config.getInterval()*1000;
+        repeat: true
+        running: true
+        onTriggered: {
+            var xx = image.image_paths;
+            image.image_index+=1;
+            if(image.image_index>=image.image_paths.length){
+                image.image_index = 0;
+            }
+        }
+    }
 }
